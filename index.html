@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Github Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+
+    <div id="gitReposData"></div>
+    <section><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></section>
+    <script id="gitRepos" type="text/x-handlebars-template">
+      <div class="wrapper">
+      <header>
+        <h1>
+          {{name}}
+        </h1>
+        <ul>
+          <li><a href={{html_url}}/zipball/master>Download <strong>ZIP File</strong></a></li>
+          <li><a href={{html_url}}/tarball/master>Download <strong>TAR File</strong></a></li>
+          <li><a href={{html_url}}>View On <strong>Github</strong></a></li>
+        </ul>
+      </header>
+      <section>{{description}}</section>
+      <hr>
+      </div>
+
+    </script>
+    <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="handlebar.js"></script>
+    <script>
+    var source   = $("#gitRepos").html();
+    var template = Handlebars.compile(source);
+
+
+    var gotTheData = function(data){
+      console.log(data);
+      for (var i = 0; i < data.length; i++) {
+        $('#gitReposData').append(template(data[i]));
+      };
+    }
+    $.get("https://api.github.com/users/mayank127/repos", gotTheData);
+    </script>
+  </body>
+</html>
+
