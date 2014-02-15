@@ -10,19 +10,31 @@
     <section><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></section>
     <script id="gitRepos" type="text/x-handlebars-template">
       <div class="wrapper">
-      <header>
-        <h1>
-          {{name}}
-        </h1>
-        <ul>
-          <li><a href={{html_url}}/zipball/master>Download <strong>ZIP File</strong></a></li>
-          <li><a href={{html_url}}/tarball/master>Download <strong>TAR File</strong></a></li>
-          <li><a href={{html_url}}>View On <strong>Github</strong></a></li>
-        </ul>
-      </header>
-      <section>{{description}}</section>
+        <header>
+          <h1>
+            {{name}}
+          </h1>
+          {{#if homepage}}
+          <p><a href="{{homepage}}">Homepage</a></p>
+          {{/if}}
+          <ul>
+            <li><a href={{html_url}}/zipball/master>Download <strong>ZIP File</strong></a></li>
+            <li><a href={{html_url}}/tarball/master>Download <strong>TAR File</strong></a></li>
+            <li><a href={{html_url}}>View On <strong>Github</strong></a></li>
+          </ul>
+        </header>
+        <section>
+          {{description}}
+          <ul id=collabs{{id}}></ul>
+        </section>
       <hr>
       </div>
+
+    </script>
+    <script id="collabs" type="text/x-handlebars-template">
+      <li>
+        <a href="{{html_url}}"><img class="collabImg" src={{avatar_url}} title={{login}}></img></a>
+      </li>
 
     </script>
     <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
@@ -30,12 +42,22 @@
     <script>
     var source   = $("#gitRepos").html();
     var template = Handlebars.compile(source);
+    source   = $("#collabs").html();
+    var template2 = Handlebars.compile(source);
 
+    var gotCollabs = function(id){
+      return function(collabs){
+        for (var j = 0; j < collabs.length; j++) {
+            $('#collabs'+id).append(template2(collabs[j]));
+          }
+      }
+    }
 
     var gotTheData = function(data){
-      console.log(data);
       for (var i = 0; i < data.length; i++) {
         $('#gitReposData').append(template(data[i]));
+        $.get((data[i].collaborators_url.replace('{/collaborator}','')), gotCollabs(data[i].id));
+
       };
     }
     $.get("https://api.github.com/users/mayank127/repos", gotTheData);

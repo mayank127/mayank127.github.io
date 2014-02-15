@@ -47,7 +47,7 @@ a small {
 
 .wrapper {
   width:860px;
-  margin:0 auto;
+  margin:10px auto;
 }
 
 blockquote {
@@ -102,8 +102,9 @@ header {
 section {
   display: inline-block;
   width: 500px;
-  padding-left: 20px;
-  float: right;
+  padding: 30px 30px;
+  vertical-align: bottom;
+
 }
 
 header ul {
@@ -124,6 +125,19 @@ header ul {
   border:1px solid #d2d2d2;
   box-shadow:inset #fff 0 1px 0, inset rgba(0,0,0,0.03) 0 -1px 0;
   width:270px;
+}
+
+section ul {
+  list-style:none;
+  padding:0;
+  margin: 0;
+}
+section li {
+  float:left;
+}
+section li img {
+  height: 40px;
+  width: 40px;
 }
 
 header li {
