@@ -2,61 +2,64 @@
 <html>
   <head>
     <title>My Github Page</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="lib/style.css">
   </head>
   <body>
-
-    <div id="gitReposData"></div>
+  	<div id="gitProfileData"></div>
     <section><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></section>
-    <script id="gitRepos" type="text/x-handlebars-template">
+
+    <script id="gitProfile" type="text/x-handlebars-template">
       <div class="big_wrapper">
         <div class="wrapper">
           <header>
+          	<a href = {{html_url}}><img src={{avatar_url}}&s=440 width=260></img>
             <h1>
               {{name}}
             </h1>
-            {{#if homepage}}
-            <p><a href="{{homepage}}">Homepage</a></p>
+            <h2>@{{login}}</h2></a>
+            {{#if blog}}
+            <a href="{{blog}}">{{blog}}</a>
             {{/if}}
-            <ul>
-              <li><a href={{html_url}}/zipball/master>Download <strong>ZIP File</strong></a></li>
-              <li><a href={{html_url}}/tarball/master>Download <strong>TAR File</strong></a></li>
-              <li><a href={{html_url}}>View On <strong>Github</strong></a></li>
-            </ul>
+            {{#if email}}
+            	<br><a href="mailto:{{email}}">{{email}}</a>
+            {{/if}}
+            {{#if location}}
+            	<br>{{location}}
+            {{/if}}
+            <br>
+            <h1>
+            	<a href="projects?user={{login}}">My Projects</a>
+            </h1>
           </header>
-          <section>
-            {{description}}
-            <ul id="collabs{{id}}"></ul>
-          </section>
-        </div>
-        <div class="wrapper">
-          <table>
+          <section class="top">
+            {{#if bio}}
+            	<blockquote>{{bio}}</blockquote>
+            {{/if}}
+            <table>
             <thead>
-            <th>Commits</th>
-            <th>Branches</th>
-            <th>Collaborators</th>
+	            <th>Followers</th>
+	            <th>Gists</th>
+	            <th>Public Repos</th>
             </thead>
             <tr>
-            <td><span id="commits{{id}}"></span></td>
-            <td><span id="branches{{id}}"></span></td>
-            <td><span id="collabs_num{{id}}"></span></td>
+	            <td>{{followers}}</td>
+	            <td>{{public_gists}}</td>
+	            <td>{{public_repos}}</td>
             </tr>
           </table>
+            <h2>Following {{following}}</h2>
+            <ul id="followingData"></ul>
+          </section>
         </div>
-        <div class="wrapper" id="language{{id}}"></div>
-        <hr class="wrapper">
       </div>
-
-
     </script>
-    <script id="collabs" type="text/x-handlebars-template">
+    <script id="follow" type="text/x-handlebars-template">
       <li>
-        <a href="?user={{login}}"><img class="collabImg" src={{avatar_url}} title={{login}}></img></a>
+        <a href="?user={{login}}"><img class="followImg" src={{avatar_url}} title={{login}}></img></a>
       </li>
-
     </script>
-    <script type="text/javascript" src="jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="handlebar.js"></script>
+    <script type="text/javascript" src="lib/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="lib/handlebar.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

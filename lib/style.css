@@ -106,6 +106,9 @@ section {
   vertical-align: bottom;
 
 }
+.top{
+  vertical-align: top;
+}
 
 header ul {
   list-style:none;
