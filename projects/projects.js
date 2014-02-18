@@ -169,6 +169,7 @@ $(document).ready(function(){
   if(!user)
     user = 'mayank127';
   document.title = user + 'Git Projects'
+  $('#backLink').attr('href','../?user='+user);
   $.get("https://api.github.com/users/" + user + "/repos", gotTheData);
 });
 

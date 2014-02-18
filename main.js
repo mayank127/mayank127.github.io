@@ -27,6 +27,6 @@ $(document).ready(function(){
   var user = getQueryVariable('user');
   if(!user)
     user = 'mayank127';
-  document.title = user + 'Git Projects'
+  document.title = user + 'Git Profile'
   $.get("https://api.github.com/users/" + user, gotTheData);
 });
